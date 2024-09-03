@@ -1,10 +1,24 @@
-import './App.css'
+import { useEffect, useState } from 'react';
+import './App.css';
+import axios from 'axios';
 
 function App() {
 
+  const [list, setList] = useState([]);
+
   const handleClick = () => {
-    console.log('clicou')
+    axios.get('http://localhost:3000/posts/list')
+    .then(response => {
+      setList (response.data);
+    })
+    .catch(error => {
+      console.error('Erro ao buscar dados:', error);
+    });
   }
+
+  useEffect(() => {
+    console.log('list', list)
+  }, [list])
 
   return (
     <div className='page'>

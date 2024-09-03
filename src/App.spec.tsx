@@ -1,25 +1,36 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
+import axios from 'axios';
 import App from './App';
 
-describe('App', () => {
-  it('should print "clicou" when the button is clicked', async () => {
-    // const fetchSpy = vi.spyOn(global, 'fetch').mockResolvedValueOnce(new Response());
+// Simula o módulo axios
+vi.mock('axios');
 
-    // // Renderiza o componente
-    // render(<App />);
+describe('App Component', () => {
+  it('should handle click and call axios', async () => {
+    
+    axios.get = vi.fn().mockResolvedValue({
+      data: [{ id: 1, title: 'Post 1' }, { id: 2, title: 'Post 2' }],
+    });
 
-    // // Busca o botão com o texto "Postar"
-    // const button = await screen.findByRole('button', { name: 'Postar' });
+    
+    const consoleLogSpy = vi.spyOn(console, 'log');
 
-    // // Simula o clique no botão
-    // fireEvent.click(button);
+    
+    render(<App />);
 
-    // // Verifica se fetch foi chamado
-    // expect(fetchSpy).toHaveBeenCalled();
+    
+    const button = screen.getByText('Postar');
+    await userEvent.click(button);
 
-    // // Restaura a implementação original do fetch
-    // fetchSpy.mockRestore();
+    
+    expect(axios.get).toHaveBeenCalledWith('http://localhost:3000/posts/list');
 
-    //Deve verificar se tá chamando a api
+    expect(consoleLogSpy).toHaveBeenNthCalledWith(1, 'list', []);
+    expect(consoleLogSpy).toHaveBeenNthCalledWith(2, 'list', [{ id: 1, title: 'Post 1' }, { id: 2, title: 'Post 2' }]);
+
+    
+    consoleLogSpy.mockRestore();
   });
 });
