@@ -1,0 +1,67 @@
+.post-card{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; /* Distribui o espaço entre os elementos */
+  align-items: center; /* Alinha os itens verticalmente no centro */
+  width: 100%;
+  padding: 1rem 0rem 1rem 0rem;
+  margin-top: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: rgb(226, 226, 226);
+}
+
+.post-card-div{
+  display: flex;
+}
+
+.post-card-texts{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.left-side{  
+  align-self: flex-start;
+  padding-left: 2.5rem;
+}
+
+.right-side{
+  align-self: flex-end;
+  padding-right: 1.5rem;
+}
+
+.post-card button{
+  width: 1rem;
+  height: 100%;
+  align-self: stretch;
+  height: 4rem;
+}
+
+.post-list{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.post-card-button{
+  display: flex;
+  background-color: red;
+  flex-direction: row;
+  justify-content: center; /* Distribui o espaço entre os elementos */
+  align-items: center; /* Alinha os itens verticalmente no centro */
+  width: 1.5rem;
+  margin-top: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.post-card-button:hover {
+  background-color: rgb(233, 0, 0);
+}
+
+.post-card-button img{
+  width: 1rem;
+  height: 1rem;
+}

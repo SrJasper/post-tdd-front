@@ -1,44 +1,63 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './App.css';
-import axios from 'axios';
+import PostCard from './components/postCard/postCard';
+import usePosts from './hooks/usePosts';
 
 function App() {
-
-  const [list, setList] = useState([]);
+  const { list, refreshFeed, createPost } = usePosts();
+  const [user, setUser] = useState('');
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
 
   const handleClick = () => {
-    axios.get('http://localhost:3000/posts/list')
-    .then(response => {
-      setList (response.data);
-    })
-    .catch(error => {
-      console.error('Erro ao buscar dados:', error);
-    });
-  }
-
-  useEffect(() => {
-    console.log('list', list)
-  }, [list])
+    if(!user){
+      alert('User is required');
+      return console.log('User is required');
+    }
+    createPost(user, title, content);
+  };
 
   return (
     <div className='page'>
       <div className="header">
-        <h1>
-          Posts
-        </h1>
-        <button>
-          i
-        </button>
+        <h1>Posts</h1>
       </div>
 
       <div className="create-post-container">
-        <input type="text" placeholder='Usuário'/>
-        <input type="text" placeholder='Titulo'/>
-        <input type="text" placeholder='Mensagem'/>
-        <button onClick={handleClick}> Postar </button>
+        <input 
+          type="text" 
+          placeholder='User' 
+          data-testid="user" 
+          onChange={(event) => setUser(event.target.value)} 
+        />
+        <input 
+          type="text" 
+          placeholder='Title' 
+          data-testid="title" 
+          onChange={(event) => setTitle(event.target.value)} 
+        />
+        <textarea 
+          placeholder='Content' 
+          data-testid="content" 
+          onChange={(event) => setContent(event.target.value)} 
+        />
+        <button data-testid="submit-button" onClick={handleClick}>Postar</button>
+      </div>
+      
+      <div className="post-list">
+        {list.slice().reverse().map((post) => (
+          <PostCard
+            key={post.id} 
+            handleClose={refreshFeed}
+            id={post.id}
+            user={post.user} 
+            title={post.title} 
+            content={post.content} 
+          />
+        ))}
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

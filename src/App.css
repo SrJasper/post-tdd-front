@@ -7,7 +7,8 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(34, 46, 81);
+  background-color: rgb(78, 111, 211);
+  font-family: Arial, sans-serif;
 }
 
 .page{
@@ -39,15 +40,28 @@ body{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 3px solid black;
+  border: none;
+  border-radius: .5rem;
   width: 100%;
   padding: 1rem 1rem 0rem 1rem;
+  background-color: rgb(96, 125, 213);
 }
 
 .create-post-container input{
   width: 100%;
   height: 2rem;
   margin-bottom: 1rem;
+  border: none;
+  border-radius: .2rem;
+}
+.create-post-container textarea{
+  min-height: 2rem; 
+  resize: vertical;
+  width: 100%;
+  height: 4rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: .2rem;
 }
 
 .create-post-container button{
@@ -55,4 +69,5 @@ body{
   height: 2rem;
   margin-bottom: 1rem;
   font-weight: bold;
+  border: none;
 }
