@@ -29,7 +29,7 @@ const PostCard: React.FC<Props> = ({ handleClose, id, user, title, content }) =>
         </div>
       </div>
       <div className='post-card-button' onClick={handleDelete}>
-        <img src="../public/images/trash-bin-icon.png" alt="" />
+        <img src="/images/trash-bin-icon.png" alt="Trash Bin Icon" />
       </div>
     </div>
   );
